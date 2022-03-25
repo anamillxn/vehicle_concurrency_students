@@ -45,5 +45,10 @@ class Blinker(threading.Thread):
 
     def run(self):
         while True:
-            # TODO
+            if self.blinking:
+                if self.activated:
+                    self.deactivate()
+                else:
+                    self.activate()
+            
             sleep(0.5)
