@@ -63,6 +63,15 @@ class Vehicle:
 
         # añadir para widget scale luminosidad
 
+        self.labelframe_environment=ttk.LabelFrame(self.ventana1, text="Environment Light")
+        self.labelframe_environment.grid(row=2,column=0, padx=5, pady=5, sticky="WE")
+
+        self.scale=tk.Scale(self.labelframe_environment, from_=0, to=100, resolution=10, orient=tk.HORIZONTAL, length=665)
+        self.scale.pack()
+        
+
+
+
         # añadir barra progreso combustible
 
         self.ventana1.after(500,self.do_work)
