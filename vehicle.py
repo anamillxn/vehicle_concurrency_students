@@ -48,6 +48,7 @@ class Vehicle:
         self.fuel = Fuel(self.engine)
 
         self.environment = Environment()
+        
         self.light = Light(self.environment)
         
         self.redlight = RedLight()
@@ -65,9 +66,11 @@ class Vehicle:
 
         self.labelframe_environment=ttk.LabelFrame(self.ventana1, text="Environment Light")
         self.labelframe_environment.grid(row=2,column=0, padx=5, pady=5, sticky="WE")
+        
 
-        self.scale=tk.Scale(self.labelframe_environment, from_=0, to=100, resolution=10, orient=tk.HORIZONTAL, length=665)
+        self.scale=tk.Scale(self.labelframe_environment, from_=0, to=100, resolution=10, orient=tk.HORIZONTAL, length=665, command=self.update_environment)
         self.scale.pack()
+        self.scale.set(self.environment.get_lum())
         
 
 
@@ -85,6 +88,10 @@ class Vehicle:
         self.ventana1.destroy()
         os._exit(1)
 
+    def update_environment(self,event):
+        self.environment.set_lum(self.scale.get())
+
+
     def action(self,evento):
         if evento.keysym=='s':
                 self.blinker_front.blink()
@@ -92,8 +99,11 @@ class Vehicle:
                 self.blinker_rear.blink()
         if evento.keysym=='r':
                 self.environment.modify_lum(10)
+                self.scale.set(self.environment.get_lum())
         if evento.keysym=='f':
                 self.environment.modify_lum(-10)
+                self.scale.set(self.environment.get_lum())
+
         if evento.keysym=='w':
                 self.engine.modify_rpm(100)
         if evento.keysym=='z':
