@@ -67,15 +67,22 @@ class Vehicle:
         self.labelframe_environment=ttk.LabelFrame(self.ventana1, text="Environment Light")
         self.labelframe_environment.grid(row=2,column=0, padx=5, pady=5, sticky="WE")
         
-
         self.scale=tk.Scale(self.labelframe_environment, from_=0, to=100, resolution=10, orient=tk.HORIZONTAL, length=665, command=self.update_environment)
         self.scale.pack()
         self.scale.set(self.environment.get_lum())
         
-
-
-
         # añadir barra progreso combustible
+
+        self.labelframe_fuel=ttk.LabelFrame(self.ventana1, text="Fuel")
+        self.labelframe_fuel.grid(row=3,column=0, padx=5, pady=5, sticky="WE")
+
+        self.progress=ttk.Progressbar(self.labelframe_fuel, orient = HORIZONTAL, length = 665, mode = 'determinate')
+        self.progress.pack()
+        self.progress['value']=int(self.fuel.get_porcentage_level())
+
+
+
+
 
         self.ventana1.after(500,self.do_work)
         self.ventana1.bind("<KeyPress>", self.action)
@@ -201,5 +208,6 @@ class Vehicle:
         self.draw_redlight()
 
         self.Labelengine.config(text=str(self.engine))
+        self.progress['value']=int(self.fuel.get_porcentage_level())
 
 vehicle1 = Vehicle()
