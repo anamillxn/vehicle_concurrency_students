@@ -1,6 +1,7 @@
 import threading
 from time import sleep
 
+
 class RedLight(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -23,4 +24,14 @@ class RedLight(threading.Thread):
     def run(self):
         while True:
             # TODO
-            sleep(0.2)
+            if self.activated==True:
+                i=1
+                for i in range(1,5):
+                    self.pos=i
+                    sleep(0.2)
+            else:
+                self.pos=0
+            
+
+
+            
